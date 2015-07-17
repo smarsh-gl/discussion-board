@@ -23,6 +23,11 @@ gulp.task('js', function() {
 	  .pipe(gulp.dest('./build/js'));
 });
 
+gulp.task('js-copy', function() {
+	gulp.src('./src/js/*.js')
+	  .pipe(gulp.dest('./build/js'));
+});
+
 gulp.task('server-build', function() {
 	gulp.src('./server-src/*.ts')
 	  .pipe(ts({
@@ -45,4 +50,4 @@ gulp.task('less', function() {
 })
 
 
-gulp.task('default', ['html', 'js', 'less', 'server-build']);
+gulp.task('default', ['html', 'js', 'js-copy', 'less', 'server-build']);
