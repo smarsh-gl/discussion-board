@@ -23,6 +23,20 @@ gulp.task('js', function() {
 	  .pipe(gulp.dest('./build/js'));
 });
 
+gulp.task('server-build', function() {
+	gulp.src('./server-src/*.ts')
+	  .pipe(ts({
+        noImplicitAny: false,
+		noExternalResolve: true,
+		target: 'es6'
+      }))
+	  .pipe(babel({
+		  code:true
+	  }))
+	  .pipe(gulp.dest('./server-build'));
+});
+
+
 gulp.task('less', function() {
 	gulp.src('./src/less/*.less')
 	  .pipe(concat('bundle.min.css'))
@@ -31,4 +45,4 @@ gulp.task('less', function() {
 })
 
 
-gulp.task('default', ['html', 'js', 'less']);
+gulp.task('default', ['html', 'js', 'less', 'server-build']);
