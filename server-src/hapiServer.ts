@@ -1,14 +1,12 @@
 declare var require:any;
 
 
-var hapi = require('hapi');
-
-
-var server: any = new hapi.Server();
-
+var Hapi: any = require('hapi');
+var server: any = new Hapi.Server();
+var port: number = 7777;
 
 server.connection({
-	port:7777
+	port:port
 });
 
 
@@ -37,7 +35,7 @@ server.route({
 });
 
 server.route({
-	method:'GET',
+	method: 'GET',
 	path: '/css/{name}',
 	handler: function(request: any, reply: any) {
 		reply.file('./../build/css/' + request.params.name);
@@ -47,5 +45,5 @@ server.route({
 
 
 server.start(function() {
-	console.log("Hapi server started on port 7777");
+	console.log("Hapi server started on port " + port);
 });
